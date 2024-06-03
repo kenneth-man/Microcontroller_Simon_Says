@@ -1,6 +1,9 @@
 # Simon Says game with SWV ITM Data Console and STM32F4 Discovery LEDs
 
 - ### You will need to connect a 4x4 keypad to 8 free IO pins on your STM32F4Discovery Microcontroller
+	- ### `GPIOD`
+		- ### `PD0-PD3` for Rows (R1-R4)
+		- ### `PD8-PD11` for Columns (C1-C4)
 ![](./imgs/4x4_keypad.png)
 
 - ### The keys `2`, `4`, `6`, `8` on the keypad correspond to the LED colors `Orange`, `Green`, `Red`, `Blue` as seen in the Schematic
