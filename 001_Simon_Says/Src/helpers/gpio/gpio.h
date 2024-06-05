@@ -7,12 +7,16 @@
 #include "../../structs/GPIOx_IDREG.h"
 #include "../../structs/GPIOx_ODREG.h"
 #include "../../macros.h"
+#include "../delay/delay.h"
+#include "../../enums/delays.h"
 
 void initGPIO(
 	RCC_AHB1ENREG volatile *const pRCCAHB1ENREG,
 	GPIOx_MODEREG volatile *const pGPIODModeReg,
 	GPIOx_PUPDREG volatile *const pGPIODPUPDReg
 );
+
+char debounce(char c);
 
 char recieveInput(
 	GPIOx_IDREG volatile *const pGPIODIDReg,

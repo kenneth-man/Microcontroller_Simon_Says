@@ -33,6 +33,11 @@ void initGPIO(
 	pGPIODModeReg->modeR15 = 1;
 }
 
+char debounce(char c) {
+	delay(MEDIUM);
+	return c;
+}
+
 char recieveInput(
 	GPIOx_IDREG volatile *const pGPIODIDReg,
 	GPIOx_ODREG volatile *const pGPIODODReg
@@ -43,33 +48,33 @@ char recieveInput(
 		pGPIODODReg->ODR2 = 1;
 		pGPIODODReg->ODR3 = 1;
 
-		if (!pGPIODIDReg->IDR8) return KEYPAD_1;
-		if (!pGPIODIDReg->IDR9) return KEYPAD_2;
-		if (!pGPIODIDReg->IDR10) return KEYPAD_3;
-		if (!pGPIODIDReg->IDR11) return KEYPAD_A;
+		if (!pGPIODIDReg->IDR8) return debounce(KEYPAD_1);
+		if (!pGPIODIDReg->IDR9) return debounce(KEYPAD_2);
+		if (!pGPIODIDReg->IDR10) return debounce(KEYPAD_3);
+		if (!pGPIODIDReg->IDR11) return debounce(KEYPAD_A);
 
 		pGPIODODReg->ODR0 = 1;
 		pGPIODODReg->ODR1 = 0;
 
-		if (!pGPIODIDReg->IDR8) return KEYPAD_4;
-		if (!pGPIODIDReg->IDR9) return KEYPAD_5;
-		if (!pGPIODIDReg->IDR10) return KEYPAD_6;
-		if (!pGPIODIDReg->IDR11) return KEYPAD_B;
+		if (!pGPIODIDReg->IDR8) return debounce(KEYPAD_4);
+		if (!pGPIODIDReg->IDR9) return debounce(KEYPAD_5);
+		if (!pGPIODIDReg->IDR10) return debounce(KEYPAD_6);
+		if (!pGPIODIDReg->IDR11) return debounce(KEYPAD_B);
 
 		pGPIODODReg->ODR1 = 1;
 		pGPIODODReg->ODR2 = 0;
 
-		if (!pGPIODIDReg->IDR8) return KEYPAD_7;
-		if (!pGPIODIDReg->IDR9) return KEYPAD_8;
-		if (!pGPIODIDReg->IDR10) return KEYPAD_9;
-		if (!pGPIODIDReg->IDR11) return KEYPAD_C;
+		if (!pGPIODIDReg->IDR8) return debounce(KEYPAD_7);
+		if (!pGPIODIDReg->IDR9) return debounce(KEYPAD_8);
+		if (!pGPIODIDReg->IDR10) return debounce(KEYPAD_9);
+		if (!pGPIODIDReg->IDR11) return debounce(KEYPAD_C);
 
 		pGPIODODReg->ODR2 = 1;
 		pGPIODODReg->ODR3 = 0;
 
-		if (!pGPIODIDReg->IDR8) return KEYPAD_STAR;
-		if (!pGPIODIDReg->IDR9) return KEYPAD_0;
-		if (!pGPIODIDReg->IDR10) return KEYPAD_HASH;
-		if (!pGPIODIDReg->IDR11) return KEYPAD_D;
+		if (!pGPIODIDReg->IDR8) return debounce(KEYPAD_STAR);
+		if (!pGPIODIDReg->IDR9) return debounce(KEYPAD_0);
+		if (!pGPIODIDReg->IDR10) return debounce(KEYPAD_HASH);
+		if (!pGPIODIDReg->IDR11) return debounce(KEYPAD_D);
 	}
 }

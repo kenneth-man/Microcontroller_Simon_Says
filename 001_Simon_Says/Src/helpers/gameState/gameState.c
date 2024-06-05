@@ -19,10 +19,12 @@ void titleScreen(
 
 	switch(input) {
 	case CASUAL_MODE:
-		printf("Casual Mode chosen");
+		printf("Casual Mode chosen\n");
+		break;
 	case PRO_MODE:
-		printf("Pro Mode chosen");
+		printf("Pro Mode chosen\n");
+		break;
 	default:
-		printf("Casual Mode chosen");
+		printf("Casual Mode chosen\n");
 	}
 }
