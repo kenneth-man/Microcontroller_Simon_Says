@@ -25,26 +25,9 @@ int main(void)
 	outputTitle();
 	initGPIO(pRCCAHB1ENREG, pGPIODModeReg, pGPIODPUPDReg);
 
-	// TODO testing - to removed
-	orange(pGPIODODReg, MEDIUM);
-	green(pGPIODODReg, MEDIUM);
-	blue(pGPIODODReg, MEDIUM);
-	red(pGPIODODReg, MEDIUM);
-
-	orange(pGPIODODReg, MEDIUM);
-	green(pGPIODODReg, MEDIUM);
-	blue(pGPIODODReg, MEDIUM);
-	red(pGPIODODReg, MEDIUM);
-
-	orange(pGPIODODReg, MEDIUM);
-	green(pGPIODODReg, MEDIUM);
-	blue(pGPIODODReg, MEDIUM);
-	red(pGPIODODReg, MEDIUM);
-
-	pGPIODODReg->ODR13 = 0;
-	pGPIODODReg->ODR12 = 0;
-	pGPIODODReg->ODR15 = 0;
-	pGPIODODReg->ODR14 = 0;
+	display(pGPIODODReg, MEDIUM, 5, circle);
+	display(pGPIODODReg, SMALL, 5, flash);
+	display(pGPIODODReg, LARGE, 1, persist);
 
 	while(1) {
 
