@@ -33,6 +33,43 @@ void initGPIO(
 	pGPIODModeReg->modeR15 = 1;
 }
 
-//char* recieveInput() {
-//
-//}
+char recieveInput(
+	GPIOx_IDREG volatile *const pGPIODIDReg,
+	GPIOx_ODREG volatile *const pGPIODODReg
+) {
+	while(1) {
+		pGPIODODReg->ODR0 = 0;
+		pGPIODODReg->ODR1 = 1;
+		pGPIODODReg->ODR2 = 1;
+		pGPIODODReg->ODR3 = 1;
+
+		if (!pGPIODIDReg->IDR8) return KEYPAD_1;
+		if (!pGPIODIDReg->IDR9) return KEYPAD_2;
+		if (!pGPIODIDReg->IDR10) return KEYPAD_3;
+		if (!pGPIODIDReg->IDR11) return KEYPAD_A;
+
+		pGPIODODReg->ODR0 = 1;
+		pGPIODODReg->ODR1 = 0;
+
+		if (!pGPIODIDReg->IDR8) return KEYPAD_4;
+		if (!pGPIODIDReg->IDR9) return KEYPAD_5;
+		if (!pGPIODIDReg->IDR10) return KEYPAD_6;
+		if (!pGPIODIDReg->IDR11) return KEYPAD_B;
+
+		pGPIODODReg->ODR1 = 1;
+		pGPIODODReg->ODR2 = 0;
+
+		if (!pGPIODIDReg->IDR8) return KEYPAD_7;
+		if (!pGPIODIDReg->IDR9) return KEYPAD_8;
+		if (!pGPIODIDReg->IDR10) return KEYPAD_9;
+		if (!pGPIODIDReg->IDR11) return KEYPAD_C;
+
+		pGPIODODReg->ODR2 = 1;
+		pGPIODODReg->ODR3 = 0;
+
+		if (!pGPIODIDReg->IDR8) return KEYPAD_STAR;
+		if (!pGPIODIDReg->IDR9) return KEYPAD_0;
+		if (!pGPIODIDReg->IDR10) return KEYPAD_HASH;
+		if (!pGPIODIDReg->IDR11) return KEYPAD_D;
+	}
+}

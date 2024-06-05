@@ -4,12 +4,19 @@
 #include "../../structs/RCC_AHB1ENREG.h"
 #include "../../structs/GPIOx_MODEREG.h"
 #include "../../structs/GPIOx_PUPDREG.h"
+#include "../../structs/GPIOx_IDREG.h"
+#include "../../structs/GPIOx_ODREG.h"
+#include "../../macros.h"
 
 void initGPIO(
 	RCC_AHB1ENREG volatile *const pRCCAHB1ENREG,
 	GPIOx_MODEREG volatile *const pGPIODModeReg,
 	GPIOx_PUPDREG volatile *const pGPIODPUPDReg
 );
-//char* recieveInput(); // TODO: reading from keypad cols & rows, make more concise
+
+char recieveInput(
+	GPIOx_IDREG volatile *const pGPIODIDReg,
+	GPIOx_ODREG volatile *const pGPIODODReg
+);
 
 #endif
