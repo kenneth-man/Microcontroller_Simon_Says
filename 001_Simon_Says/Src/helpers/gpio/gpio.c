@@ -34,7 +34,7 @@ void initGPIO(
 }
 
 char debounce(char c) {
-	delay(MEDIUM);
+	delay(SPEED2);
 	return c;
 }
 

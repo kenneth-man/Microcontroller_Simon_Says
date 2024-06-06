@@ -1,6 +1,6 @@
 #include "gameState.h"
 
-void titleScreen(
+char titleScreen(
 	GPIOx_IDREG volatile *const pGPIODIDReg,
 	GPIOx_ODREG volatile *const pGPIODODReg
 ) {
@@ -11,20 +11,68 @@ void titleScreen(
 		"     !:! !!: !!:     !!: !!:  !!! !!:  !!!          !:! !!:  !!!   !!:       !:! \n"
 		" ::.: :  :    :      :    : :. :  ::    :       ::.: :   :   : :   .:    ::.: :  \n\n"
 	);
-	display(pGPIODODReg, MEDIUM, 5, circle);
-	printf("Select a Difficulty Level: \n");
-	printf("`%c` Key = `Casual`\n", CASUAL_MODE);
-	printf("`%c` Key = `Pro`\n\n", PRO_MODE);
-	char input = recieveInput(pGPIODIDReg, pGPIODODReg);
+	display(pGPIODODReg, SPEED2, 5, circle);
 
-	switch(input) {
+	void titleInstructions() {
+		printf("Select a Difficulty Level: \n");
+		printf("`%c` Key = `Casual`\n", CASUAL_MODE);
+		printf("`%c` Key = `Pro`\n\n", PRO_MODE);
+	}
+
+	titleInstructions();
+
+	while(1) {
+		char input = recieveInput(pGPIODIDReg, pGPIODODReg);
+
+		switch(input) {
+		case KEYPAD_1:
+			printf("Casual Mode chosen\n\n");
+			display(pGPIODODReg, SPEED_DIFF, 5, flash);
+			return CASUAL_MODE;
+		case KEYPAD_2:
+			printf("Pro Mode chosen\n\n");
+			display(pGPIODODReg, SPEED_DIFF, 5, flash);
+			return PRO_MODE;
+		default:
+			printf("Invalid Key Pressed, Try again...\n");
+			titleInstructions();
+		}
+	}
+}
+
+GAME_CONFIG initGameConfig(char difficulty) {
+	GAME_CONFIG config;
+
+	switch(difficulty) {
 	case CASUAL_MODE:
-		printf("Casual Mode chosen\n");
+		config.speed = SPEED_MAX;
+		config.sequenceLength = CASUAL_MODE_SEQ_LEN;
+		config.lives = CASUAL_MODE_LIVES;
 		break;
 	case PRO_MODE:
-		printf("Pro Mode chosen\n");
+		config.speed = SPEED6;
+		config.sequenceLength = PRO_MODE_SEQ_LEN;
+		config.lives = PRO_MODE_LIVES;
 		break;
 	default:
-		printf("Casual Mode chosen\n");
+		config.speed = SPEED_MAX;
+		config.sequenceLength = CASUAL_MODE_SEQ_LEN;
+		config.lives = CASUAL_MODE_LIVES;
 	}
+
+	memset(config.sequence, '\0', sizeof(config.sequence));
+	config.score = GAME_CONFIG_SCORE;
+	config.stage = GAME_CONFIG_STAGE;
+
+	return config;
+}
+
+void inGame(
+	GAME_CONFIG *gameConfig,
+	GPIOx_ODREG volatile *const pGPIODODReg
+) {
+	printf("Ready...\n");
+	delay(SPEED7);
+	printf("Simon Says...\n");
+
 }

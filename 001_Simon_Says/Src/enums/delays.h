@@ -16,10 +16,19 @@
 */
 
 typedef enum {
-	SMALL = 150000,
-	MEDIUM = 300000,
-	LARGE = 600000,
-	EXTRA_LARGE = 2000000
+	// 0.075 seconds
+	// used for looping over this enum because each value has a difference of 150000 from prev/next
+	SPEED_DIFF = 150000,
+	SPEED2 = 300000, // 0.15 seconds
+	SPEED3 = 450000, // 0.225 seconds
+	SPEED4 = 600000, // 0.3 seconds
+	SPEED5 = 750000, // 0.375 seconds
+	SPEED6 = 900000, // 0.45 seconds
+	SPEED7 = 1050000, // 0.525 seconds
+	SPEED8 = 1200000, // 0.6 seconds
+	SPEED9 = 1350000, // 0.675 seconds
+	SPEED10 = 1500000, // 0.75 seconds
+	SPEED_MAX = 1650000 // 0.825 seconds
 } DELAYS;
 
 #endif

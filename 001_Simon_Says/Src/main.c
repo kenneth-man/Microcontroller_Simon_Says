@@ -5,6 +5,7 @@
 #include "structs/GPIOx_MODEREG.h"
 #include "structs/GPIOx_PUPDREG.h"
 #include "structs/RCC_AHB1ENREG.h"
+#include "structs/GAME_CONFIG.h"
 #include "helpers/gpio/gpio.h"
 #include "helpers/gameState/gameState.h"
 
@@ -21,9 +22,25 @@ int main(void)
 	GPIOx_ODREG volatile *const pGPIODODReg = (GPIOx_ODREG*)(GPIOD_ODREG_ADDR);
 
 	initGPIO(pRCCAHB1ENREG, pGPIODModeReg, pGPIODPUPDReg);
-	titleScreen(pGPIODIDReg, pGPIODODReg);
+	const char difficulty = titleScreen(pGPIODIDReg, pGPIODODReg);
+	GAME_CONFIG gameConfig = initGameConfig(difficulty);
+	printf("game config sequence init correct?: %i\n", gameConfig.sequence[69]);
+	printf("game config lives: %i\n", gameConfig.lives);
+	printf("game config score: %i\n", (int)gameConfig.score);
+	printf("game config stage: %i\n", gameConfig.stage);
+	printf("game config sequenceLength: %i\n", (int)gameConfig.sequenceLength);
+	printf("game config speed: %i\n", (int)gameConfig.speed);
+
+//	for(unsigned int i=SPEED_MAX;i>=SPEED_DIFF;i-=SPEED_DIFF)
+//	    {
+//	       printf("val: %i\n", i);
+//	    }
 
 	while(1) {
-
+		if (gameConfig.lives > 0) {
+			inGame(&gameConfig, pGPIODODReg);
+			continue;
+		}
+		printf("Game over stuff \n");
 	}
 }
