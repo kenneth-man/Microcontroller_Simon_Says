@@ -5,6 +5,9 @@
 #include "../delay/delay.h"
 #include "../../enums/delays.h"
 
-void outputDelay(char *message, DELAYS delayType);
+void outputDelay(
+	const char *message,
+	const DELAYS delayType
+);
 
 #endif

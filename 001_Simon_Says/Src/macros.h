@@ -12,7 +12,7 @@
 #define PRO_MODE ('2')
 #define PRO_MODE_SEQ_LEN (4)
 #define PRO_MODE_LIVES (1)
-#define GAME_CONFIG_MAX_SEQ_LEN (999)
+#define GAME_CONFIG_MAX_SEQ_LEN (99)
 #define GAME_CONFIG_SCORE (0)
 #define GAME_CONFIG_STAGE (0)
 #define KEYPAD_1 ('1')

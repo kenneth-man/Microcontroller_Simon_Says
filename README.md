@@ -23,5 +23,5 @@
 			- ### Each correct answer increments score by 2
 			- ### Speed and sequence increases significantly for every correct answer
 			- ### 1 Life
-	- ### After each sequence, press the keys in the same order as the LEDS, then press `A` key to submit
+	- ### After each sequence, press the keys in the same order as the LEDS, then press `Spacebar` key to submit
 	- ### Game ends when no lives remain and will display the final score

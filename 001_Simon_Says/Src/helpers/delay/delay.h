@@ -4,6 +4,6 @@
 #include <stddef.h>
 #include "../../enums/delays.h"
 
-void delay(DELAYS delayType);
+void delay(const DELAYS delayType);
 
 #endif

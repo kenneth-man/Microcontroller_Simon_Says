@@ -1,6 +1,6 @@
 #include "output.h"
 
-void output(char *message) {
+void output(const char *message) {
 	printf("------------------------------------\n");
 	printf("%s\n", message);
 	printf("------------------------------------\n");

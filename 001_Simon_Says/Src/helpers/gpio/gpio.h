@@ -16,7 +16,7 @@ void initGPIO(
 	GPIOx_PUPDREG volatile *const pGPIODPUPDReg
 );
 
-char debounce(char c);
+char debounce(const char c);
 
 char recieveInput(
 	GPIOx_IDREG volatile *const pGPIODIDReg,

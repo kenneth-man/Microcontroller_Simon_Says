@@ -1,7 +1,24 @@
 #ifndef HELPERS_GAMECALC_GAMECALC_H_
 #define HELPERS_GAMECALC_GAMECALC_H_
 
-// function to get all truthy values in array
+#include <stdint.h>
+#include <stdlib.h>
+#include "../../variables/variables.h"
+#include "../../structs/GAME_CONFIG.h"
+#include "../../macros.h"
+
+void updateSequenceValues(
+	GAME_CONFIG *gameConfig,
+	const char difficulty
+);
+
+char getRandomKey(
+	char const *const keys,
+	const uint8_t maxIndex,
+	const uint8_t minIndex
+);
+
+char *getKeys(const char difficulty);
 
 // function to update the game config speed
 	// get index of game config speed - game config stage,

@@ -4,6 +4,8 @@ char titleScreen(
 	GPIOx_IDREG volatile *const pGPIODIDReg,
 	GPIOx_ODREG volatile *const pGPIODODReg
 ) {
+	srand(time(NULL));
+
 	puts(
 		"  @@@@@@ @@@ @@@@@@@@@@   @@@@@@  @@@  @@@       @@@@@@  @@@@@@  @@@ @@@  @@@@@@ \n"
 		" !@@     @@! @@! @@! @@! @@!  @@@ @@!@!@@@      !@@     @@!  @@@ @@! !@@ !@@     \n"
@@ -11,6 +13,7 @@ char titleScreen(
 		"     !:! !!: !!:     !!: !!:  !!! !!:  !!!          !:! !!:  !!!   !!:       !:! \n"
 		" ::.: :  :    :      :    : :. :  ::    :       ::.: :   :   : :   .:    ::.: :  \n\n"
 	);
+
 	display(pGPIODODReg, SPEED2, 5, circle);
 
 	void titleInstructions() {
@@ -26,21 +29,21 @@ char titleScreen(
 
 		switch(input) {
 		case KEYPAD_1:
-			printf("Casual Mode chosen\n\n");
+			output("Casual Mode chosen!");
 			display(pGPIODODReg, SPEED_DIFF, 5, flash);
 			return CASUAL_MODE;
 		case KEYPAD_2:
-			printf("Pro Mode chosen\n\n");
+			output("Pro Mode chosen!");
 			display(pGPIODODReg, SPEED_DIFF, 5, flash);
 			return PRO_MODE;
 		default:
-			printf("Invalid Key Pressed, Try again...\n");
+			output("Invalid Key Pressed, Try again...");
 			titleInstructions();
 		}
 	}
 }
 
-GAME_CONFIG initGameConfig(char difficulty) {
+GAME_CONFIG initGameConfig(const char difficulty) {
 	GAME_CONFIG config;
 
 	switch(difficulty) {
@@ -69,10 +72,13 @@ GAME_CONFIG initGameConfig(char difficulty) {
 
 void inGame(
 	GAME_CONFIG *gameConfig,
-	GPIOx_ODREG volatile *const pGPIODODReg
+	GPIOx_ODREG volatile *const pGPIODODReg,
+	const char difficulty
 ) {
+	updateSequenceValues(gameConfig, difficulty);
 	printf("Ready...\n");
 	delay(SPEED7);
 	printf("Simon Says...\n");
+	delay(SPEED7);
 
 }

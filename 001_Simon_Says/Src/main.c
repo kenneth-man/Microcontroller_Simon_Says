@@ -8,6 +8,7 @@
 #include "structs/GAME_CONFIG.h"
 #include "helpers/gpio/gpio.h"
 #include "helpers/gameState/gameState.h"
+#include "variables/variables.h"
 
 #if !defined(__SOFT_FP__) && defined(__ARM_FP)
   #warning "FPU is not initialized, but the project is compiling for an FPU. Please initialize the FPU before use."
@@ -24,21 +25,14 @@ int main(void)
 	initGPIO(pRCCAHB1ENREG, pGPIODModeReg, pGPIODPUPDReg);
 	const char difficulty = titleScreen(pGPIODIDReg, pGPIODODReg);
 	GAME_CONFIG gameConfig = initGameConfig(difficulty);
-	printf("game config sequence init correct?: %i\n", gameConfig.sequence[69]);
-	printf("game config lives: %i\n", gameConfig.lives);
-	printf("game config score: %i\n", (int)gameConfig.score);
-	printf("game config stage: %i\n", gameConfig.stage);
-	printf("game config sequenceLength: %i\n", (int)gameConfig.sequenceLength);
-	printf("game config speed: %i\n", (int)gameConfig.speed);
 
-//	for(unsigned int i=SPEED_MAX;i>=SPEED_DIFF;i-=SPEED_DIFF)
-//	    {
-//	       printf("val: %i\n", i);
-//	    }
+//	for(unsigned int i=SPEED_MAX;i>=SPEED_DIFF;i-=SPEED_DIFF) {
+//	   printf("val: %i\n", i);
+//	}
 
 	while(1) {
 		if (gameConfig.lives > 0) {
-			inGame(&gameConfig, pGPIODODReg);
+			inGame(&gameConfig, pGPIODODReg, difficulty);
 			continue;
 		}
 		printf("Game over stuff \n");

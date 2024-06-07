@@ -5,23 +5,49 @@
 #include "../../structs/GPIOx_ODREG.h"
 #include "../delay/delay.h"
 #include "../../enums/delays.h"
+#include "../../macros.h"
 
-void orange(GPIOx_ODREG volatile *const pGPIODODReg, DELAYS d);
-void green(GPIOx_ODREG volatile *const pGPIODODReg, DELAYS d);
-void blue(GPIOx_ODREG volatile *const pGPIODODReg, DELAYS d);
-void red(GPIOx_ODREG volatile *const pGPIODODReg, DELAYS d);
+void orange(
+	GPIOx_ODREG volatile *const pGPIODODReg,
+	const DELAYS d
+);
+void green(
+	GPIOx_ODREG volatile *const pGPIODODReg,
+	const DELAYS d
+);
+void blue(
+	GPIOx_ODREG volatile *const pGPIODODReg,
+	const DELAYS d
+);
+void red(
+	GPIOx_ODREG volatile *const pGPIODODReg,
+	const DELAYS d
+);
 
-// circle animation (5 times for intro, 3 for correct answer...)
-// flashing animation (option for delay speed, 5 times for selecting a difficulty level, 3 for incorrect answer)
-void circle(GPIOx_ODREG volatile *const pGPIODODReg, DELAYS d);
-void flash(GPIOx_ODREG volatile *const pGPIODODReg, DELAYS d);
-void persist(GPIOx_ODREG volatile *const pGPIODODReg, DELAYS d);
+void circle(
+	GPIOx_ODREG volatile *const pGPIODODReg,
+	const DELAYS d
+);
+void flash(
+	GPIOx_ODREG volatile *const pGPIODODReg,
+	const DELAYS d
+);
+void persist(
+	GPIOx_ODREG volatile *const pGPIODODReg,
+	const DELAYS d
+);
 
 void display(
 	GPIOx_ODREG volatile *const pGPIODODReg,
-	DELAYS delay,
-	uint8_t count,
-	void animation(GPIOx_ODREG volatile *const pGPIODODReg, DELAYS delay)
+	const DELAYS d,
+	const uint8_t count,
+	void animation(GPIOx_ODREG volatile *const pGPIODODReg, DELAYS d)
+);
+
+void displayColour(
+	GPIOx_ODREG volatile *const pGPIODODReg,
+	const DELAYS d,
+	const char key
 );
 
 #endif

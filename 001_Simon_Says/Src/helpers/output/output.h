@@ -3,6 +3,6 @@
 
 #include <stdio.h>
 
-void output(char *message);
+void output(const char *message);
 
 #endif

@@ -2,7 +2,7 @@
 
 void orange(
 	GPIOx_ODREG volatile *const pGPIODODReg,
-	DELAYS d
+	const DELAYS d
 ) {
 	pGPIODODReg->ODR13 = 1;
 	delay(d);
@@ -11,7 +11,7 @@ void orange(
 
 void green(
 	GPIOx_ODREG volatile *const pGPIODODReg,
-	DELAYS d
+	const DELAYS d
 ) {
 	pGPIODODReg->ODR12 = 1;
 	delay(d);
@@ -20,7 +20,7 @@ void green(
 
 void blue(
 	GPIOx_ODREG volatile *const pGPIODODReg,
-	DELAYS d
+	const DELAYS d
 ) {
 	pGPIODODReg->ODR15 = 1;
 	delay(d);
@@ -29,7 +29,7 @@ void blue(
 
 void red(
 	GPIOx_ODREG volatile *const pGPIODODReg,
-	DELAYS d
+	const DELAYS d
 ) {
 	pGPIODODReg->ODR14 = 1;
 	delay(d);
@@ -38,7 +38,7 @@ void red(
 
 void circle(
 	GPIOx_ODREG volatile *const pGPIODODReg,
-	DELAYS d
+	const DELAYS d
 ) {
 	orange(pGPIODODReg, d);
 	green(pGPIODODReg, d);
@@ -48,7 +48,7 @@ void circle(
 
 void flash(
 	GPIOx_ODREG volatile *const pGPIODODReg,
-	DELAYS d
+	const DELAYS d
 ) {
 	pGPIODODReg->ODR13 = 1;
 	pGPIODODReg->ODR12 = 1;
@@ -64,7 +64,7 @@ void flash(
 
 void persist(
 	GPIOx_ODREG volatile *const pGPIODODReg,
-	DELAYS d
+	const DELAYS d
 ) {
 	pGPIODODReg->ODR13 = 1;
 	delay(d);
@@ -85,11 +85,33 @@ void persist(
 
 void display (
 	GPIOx_ODREG volatile *const pGPIODODReg,
-	DELAYS delay,
-	uint8_t count,
-	void animation(GPIOx_ODREG volatile *const pGPIODODReg, DELAYS delay)
+	const DELAYS d,
+	const uint8_t count,
+	void animation(GPIOx_ODREG volatile *const pGPIODODReg, DELAYS d)
 ) {
 	for(size_t i = 0; i < count; ++i) {
-		animation(pGPIODODReg, delay);
+		animation(pGPIODODReg, d);
+	}
+}
+
+// would use a `Map` data structure, but not ootb for C
+void displayColour(
+	GPIOx_ODREG volatile *const pGPIODODReg,
+	const DELAYS d,
+	const char key
+) {
+	switch(key) {
+	case KEYPAD_2:
+		orange(pGPIODODReg, d);
+		break;
+	case KEYPAD_4:
+		green(pGPIODODReg, d);
+		break;
+	case KEYPAD_8:
+		blue(pGPIODODReg, d);
+		break;
+	case KEYPAD_6:
+		red(pGPIODODReg, d);
+		break;
 	}
 }

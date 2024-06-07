@@ -33,7 +33,7 @@ void initGPIO(
 	pGPIODModeReg->modeR15 = 1;
 }
 
-char debounce(char c) {
+char debounce(const char c) {
 	delay(SPEED2);
 	return c;
 }
