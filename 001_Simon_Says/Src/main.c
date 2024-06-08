@@ -23,7 +23,7 @@ int main(void)
 	GPIOx_ODREG volatile *const pGPIODODReg = (GPIOx_ODREG*)(GPIOD_ODREG_ADDR);
 
 	initGPIO(pRCCAHB1ENREG, pGPIODModeReg, pGPIODPUPDReg);
-	const char difficulty = titleScreen(pGPIODIDReg, pGPIODODReg);
+	char difficulty = titleScreen(pGPIODIDReg, pGPIODODReg);
 	GAME_CONFIG gameConfig = initGameConfig(difficulty);
 
 	while(1) {
@@ -31,6 +31,8 @@ int main(void)
 			inGame(&gameConfig, pGPIODIDReg, pGPIODODReg, difficulty);
 			continue;
 		}
-		printf("Game over...\n");
+		gameOver(&gameConfig, pGPIODIDReg, pGPIODODReg);
+		difficulty = titleScreen(pGPIODIDReg, pGPIODODReg);
+		gameConfig = initGameConfig(difficulty);
 	}
 }

@@ -35,4 +35,10 @@ int32_t playGame(
 	GPIOx_ODREG volatile *const pGPIODODReg
 );
 
+void gameOver(
+	const GAME_CONFIG *gameConfig,
+	GPIOx_IDREG volatile *const pGPIODIDReg,
+	GPIOx_ODREG volatile *const pGPIODODReg
+);
+
 #endif
