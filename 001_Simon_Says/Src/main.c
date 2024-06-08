@@ -26,15 +26,11 @@ int main(void)
 	const char difficulty = titleScreen(pGPIODIDReg, pGPIODODReg);
 	GAME_CONFIG gameConfig = initGameConfig(difficulty);
 
-//	for(unsigned int i=SPEED_MAX;i>=SPEED_DIFF;i-=SPEED_DIFF) {
-//	   printf("val: %i\n", i);
-//	}
-
 	while(1) {
 		if (gameConfig.lives > 0) {
-			inGame(&gameConfig, pGPIODODReg, difficulty);
+			inGame(&gameConfig, pGPIODIDReg, pGPIODODReg, difficulty);
 			continue;
 		}
-		printf("Game over stuff \n");
+		printf("Game over...\n");
 	}
 }

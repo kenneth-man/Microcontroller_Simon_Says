@@ -17,7 +17,7 @@ char titleScreen(
 	display(pGPIODODReg, SPEED2, 5, circle);
 
 	void titleInstructions() {
-		printf("Select a Difficulty Level: \n");
+		output("Select a Difficulty Level:");
 		printf("`%c` Key = `Casual`\n", CASUAL_MODE);
 		printf("`%c` Key = `Pro`\n\n", PRO_MODE);
 	}
@@ -72,13 +72,54 @@ GAME_CONFIG initGameConfig(const char difficulty) {
 
 void inGame(
 	GAME_CONFIG *gameConfig,
+	GPIOx_IDREG volatile *const pGPIODIDReg,
 	GPIOx_ODREG volatile *const pGPIODODReg,
 	const char difficulty
 ) {
-	updateSequenceValues(gameConfig, difficulty);
+	updateSequence(gameConfig, difficulty);
+
 	printf("Ready...\n");
 	delay(SPEED7);
 	printf("Simon Says...\n");
 	delay(SPEED7);
 
+	int32_t correctReply = playGame(gameConfig, pGPIODIDReg, pGPIODODReg);
+
+	if (correctReply != 0) {
+		gameConfig->lives -= 1;
+		return;
+	}
+
+	gameConfig->stage += 1;
+
+	updateGameConfig(gameConfig, difficulty);
+}
+
+int32_t playGame(
+	GAME_CONFIG *gameConfig,
+	GPIOx_IDREG volatile *const pGPIODIDReg,
+	GPIOx_ODREG volatile *const pGPIODODReg
+) {
+	char sequence[gameConfig->sequenceLength];
+
+	for(uint8_t i = 0; i < gameConfig->sequenceLength; ++i) {
+		sequence[i] = gameConfig->sequence[i];
+
+		displaySequenceElement(
+			pGPIODODReg,
+			gameConfig->speed,
+			gameConfig->sequence[i]
+		);
+	}
+
+	output("\n...And your reply is?");
+
+	char reply[gameConfig->sequenceLength];
+
+	for(uint8_t i = 0; i < gameConfig->sequenceLength; ++i) {
+		const char input = recieveInput(pGPIODIDReg, pGPIODODReg);
+		reply[i] = input;
+	}
+
+	return (int32_t)memcmp(sequence, reply, sizeof(sequence));
 }

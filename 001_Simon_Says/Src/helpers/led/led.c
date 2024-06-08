@@ -95,7 +95,7 @@ void display (
 }
 
 // would use a `Map` data structure, but not ootb for C
-void displayColour(
+void displaySequenceElement(
 	GPIOx_ODREG volatile *const pGPIODODReg,
 	const DELAYS d,
 	const char key
@@ -113,5 +113,7 @@ void displayColour(
 	case KEYPAD_6:
 		red(pGPIODODReg, d);
 		break;
+	default:
+		printf("Key! --> %c\n", key);
 	}
 }

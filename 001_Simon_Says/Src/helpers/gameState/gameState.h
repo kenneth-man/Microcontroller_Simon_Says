@@ -24,8 +24,15 @@ GAME_CONFIG initGameConfig(const char difficulty);
 
 void inGame(
 	GAME_CONFIG *gameConfig,
+	GPIOx_IDREG volatile *const pGPIODIDReg,
 	GPIOx_ODREG volatile *const pGPIODODReg,
 	const char difficulty
+);
+
+int32_t playGame(
+	GAME_CONFIG *gameConfig,
+	GPIOx_IDREG volatile *const pGPIODIDReg,
+	GPIOx_ODREG volatile *const pGPIODODReg
 );
 
 #endif

@@ -1,6 +1,7 @@
 #ifndef HELPERS_LED_LED_H_
 #define HELPERS_LED_LED_H_
 
+#include <stdio.h>
 #include <stdint.h>
 #include "../../structs/GPIOx_ODREG.h"
 #include "../delay/delay.h"
@@ -44,7 +45,7 @@ void display(
 	void animation(GPIOx_ODREG volatile *const pGPIODODReg, DELAYS d)
 );
 
-void displayColour(
+void displaySequenceElement(
 	GPIOx_ODREG volatile *const pGPIODODReg,
 	const DELAYS d,
 	const char key
