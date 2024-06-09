@@ -22,7 +22,7 @@ https://github.com/kenneth-man/Microcontroller_Simon_Says/assets/81658169/cfa9df
 			- ### 3 Lives
 		- ### 2 = Pro
 			- ### Will light up LEDS and display keypad characters in a sequence
-			- ### Each correct answer increments score by 2
+			- ### Each correct answer increments score by 5
 			- ### Speed and sequence increases significantly for every correct answer
 			- ### 1 Life
 	- ### After each sequence, press the keys in the same order as the LEDS

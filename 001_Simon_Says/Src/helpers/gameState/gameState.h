@@ -4,8 +4,6 @@
 #include <stdio.h>
 #include <stdint.h>
 #include <string.h>
-#include <time.h>
-#include <stdlib.h>
 #include "../led/led.h"
 #include "../delay/delay.h"
 #include "../../enums/delays.h"

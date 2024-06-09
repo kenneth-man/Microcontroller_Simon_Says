@@ -75,11 +75,11 @@ void persist(
 	pGPIODODReg->ODR14 = 1;
 	delay(d);
 	pGPIODODReg->ODR13 = 0;
-	delay(d);
+	delay(SPEED_DIFF);
 	pGPIODODReg->ODR12 = 0;
-	delay(d);
+	delay(SPEED_DIFF);
 	pGPIODODReg->ODR15 = 0;
-	delay(d);
+	delay(SPEED_DIFF);
 	pGPIODODReg->ODR14 = 0;
 }
 

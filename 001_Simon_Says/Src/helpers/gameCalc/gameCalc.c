@@ -29,12 +29,12 @@ void updateGameConfig(
 ) {
 	switch(difficulty) {
 	case CASUAL_MODE:
-		gameConfig->score += 1;
-		gameConfig->sequenceLength += 1;
+		gameConfig->score += CASUAL_MODE_SCORE_UPD;
+		gameConfig->sequenceLength += CASUAL_MODE_SEQ_LEN_UPD;
 		break;
 	case PRO_MODE:
-		gameConfig->score += 2;
-		gameConfig->sequenceLength += 2;
+		gameConfig->score += PRO_MODE_SCORE_UPD;
+		gameConfig->sequenceLength += PRO_MODE_SEQ_LEN_UPD;
 		break;
 	}
 

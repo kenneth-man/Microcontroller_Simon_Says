@@ -4,8 +4,6 @@ char titleScreen(
 	GPIOx_IDREG volatile *const pGPIODIDReg,
 	GPIOx_ODREG volatile *const pGPIODODReg
 ) {
-	srand(time(NULL));
-
 	puts(
 		"  @@@@@@ @@@ @@@@@@@@@@   @@@@@@  @@@  @@@       @@@@@@  @@@@@@  @@@ @@@  @@@@@@ \n"
 		" !@@     @@! @@! @@! @@! @@!  @@@ @@!@!@@@      !@@     @@!  @@@ @@! !@@ !@@     \n"
@@ -115,6 +113,10 @@ int32_t playGame(
 			gameConfig->speed,
 			gameConfig->sequence[i]
 		);
+
+		if (gameConfig->sequence[i] == gameConfig->sequence[i+1]) {
+			delay(SPEED_DIFF);
+		}
 	}
 
 	output("...And your reply is?");
@@ -122,7 +124,11 @@ int32_t playGame(
 	char reply[gameConfig->sequenceLength];
 
 	for(uint8_t i = 0; i < gameConfig->sequenceLength; ++i) {
-		printf(i == 0 ? "Enter the First Key in the sequence\n" : "Enter the Next Key\n");
+		if (i == 0) {
+			printf("Enter the First Key in the sequence\n");
+		} else {
+			printf("%c Key Pressed. Enter the Next Key...\n", reply[i - 1]);
+		}
 		const char input = recieveInput(pGPIODIDReg, pGPIODODReg);
 		reply[i] = input;
 	}
@@ -142,7 +148,6 @@ void gameOver(
 	printf("Stage: %i\n", gameConfig->stage + 1);
 	printf("Speed: %i\n", (int)(gameConfig->speed / SPEED_DIFF));
 	printf("Sequence Length: %i\n", (int)(gameConfig->sequenceLength));
-
 	output("Press any Key to Restart...");
 	recieveInput(pGPIODIDReg, pGPIODODReg);
 }
