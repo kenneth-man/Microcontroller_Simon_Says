@@ -78,10 +78,12 @@ void inGame(
 ) {
 	updateSequence(gameConfig, difficulty);
 
-	printf("Stage %i, Ready...\n", gameConfig->stage + 1);
-	delay(SPEED7);
+	printf("Stage: %i, Lives: %i\n", gameConfig->stage + 1, gameConfig->lives);
+	delay(SPEED10);
+	printf("Ready...\n");
+	delay(SPEED10);
 	printf("Simon Says...\n");
-	delay(SPEED7);
+	delay(SPEED10);
 
 	int32_t correctReply = playGame(gameConfig, pGPIODIDReg, pGPIODODReg);
 
@@ -115,7 +117,7 @@ int32_t playGame(
 		);
 	}
 
-	output("\n...And your reply is?");
+	output("...And your reply is?");
 
 	char reply[gameConfig->sequenceLength];
 
@@ -135,12 +137,12 @@ void gameOver(
 ) {
 	output("GAME OVER!!!");
 	display(pGPIODODReg, SPEED_MAX, 1, persist);
-	output("\nYour Stats");
+	output("Your Stats");
 	printf("Score: %i\n", (int)(gameConfig->score));
 	printf("Stage: %i\n", gameConfig->stage + 1);
 	printf("Speed: %i\n", (int)(gameConfig->speed / SPEED_DIFF));
 	printf("Sequence Length: %i\n", (int)(gameConfig->sequenceLength));
 
-	output("\nPress any Key to Restart...");
+	output("Press any Key to Restart...");
 	recieveInput(pGPIODIDReg, pGPIODODReg);
 }
