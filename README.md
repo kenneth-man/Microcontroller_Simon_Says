@@ -6,6 +6,8 @@
 		- ### `PD8-PD11` for Columns (C1-C4)
 ![](./imgs/4x4_keypad.png)
 
+https://github.com/kenneth-man/Microcontroller_Simon_Says/assets/81658169/cfa9df25-8d54-40cd-89d2-aeb02f78dd6e
+
 - ### The keys `2`, `4`, `6`, `8` on the keypad correspond to the LED colors `Orange`, `Green`, `Red`, `Blue` as seen in the Schematic
 ![](./imgs/led.png)
 
